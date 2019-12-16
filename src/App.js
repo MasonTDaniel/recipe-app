@@ -48,6 +48,7 @@ const App = () => {
           Search
         </button>
       </form>
+      <h1 className="header">Search above to find great new recipes!</h1>
       <div className="recipes">
         {recipes.map(recipe => (
           <Recipe
@@ -56,6 +57,7 @@ const App = () => {
             calories={recipe.recipe.calories}
             image={recipe.recipe.image}
             ingredients={recipe.recipe.ingredients}
+            url={recipe.recipe.url}
           />
         ))}
       </div>

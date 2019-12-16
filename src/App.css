@@ -41,6 +41,11 @@
   color: white;
 }
 
+.header {
+  text-align: center;
+  color: lightgray;
+}
+
 .recipes {
   display: flex;
   justify-content: space-around;

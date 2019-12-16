@@ -1,21 +1,26 @@
 import React from "react";
 import "./recipe-module.css";
 
-const Recipe = ({ title, calories, image, ingredients }) => {
+function round(value, decimals) {
+  return Number(Math.round(value + "e" + decimals) + "e-" + decimals);
+}
+
+const Recipe = ({ title, calories, image, ingredients, url }) => {
   return (
     <div className="recipe">
       <h1>{title}</h1>
-      <div className="ingredients">
-        Ingredients
-        <ol className="ingredient-list">
-          {ingredients.map(ingredient => (
-            <li>{ingredient.text}</li>
-          ))}
-        </ol>
-      </div>
+      <p>Calories: {round(calories, 0)}</p>
+      <div className="ingredients">Ingredients</div>
+      <ul className="ingredient">
+        {ingredients.map(ingredient => (
+          <li>{ingredient.text}</li>
+        ))}
+      </ul>
 
-      <p>{calories}</p>
       <img className="image" src={image} alt="" />
+      <a className="recipe-link" href={url}>
+        Recipe
+      </a>
     </div>
   );
 };
