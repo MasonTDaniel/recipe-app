@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Recipe from "./Recipe";
 import logo from "./logo.svg";
 import "./App.css";
+import { Helmet } from "react-helmet";
 import { directive } from "@babel/types";
 
 const App = () => {
