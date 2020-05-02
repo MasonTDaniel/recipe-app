@@ -193,6 +193,10 @@ button span:before, button span:after
     margin-top: 1rem;
 }
 
+.ui.card:last-child {
+    margin-bottom: 1rem;
+}
+
 img {
     vertical-align: text-bottom;
     border-radius: 5px;
