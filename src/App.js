@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Recipe from "./Recipe";
-import logo from "./logo.svg";
 import "./App.css";
-import { Helmet } from "react-helmet";
-import { directive } from "@babel/types";
+import { animateScroll as scroll } from 'react-scroll'
 
 const App = () => {
   const APP_ID = "92c867da";
@@ -19,7 +17,7 @@ const App = () => {
 
   const getRecipes = async () => {
     const response = await fetch(
-      `https://api.edamam.com/search?q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}`
+      `https://api.edamam.com/search?q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}&from=0&to=25`
     );
     const data = await response.json();
     setRecipes(data.hits);
@@ -34,35 +32,47 @@ const App = () => {
     e.preventDefault();
     setQuery(search);
     setSearch("");
+    setTimeout(() => { scroll.scrollTo(600); }, 1000);
+
   };
 
   return (
-    <div className="App">
-      <form onSubmit={getSearch} className="search-form">
-        <input
-          className="search-bar"
-          type="text"
-          value={search}
-          onChange={updateSearch}
-        />
-        <button className="search-button" type="submit">
-          Search
-        </button>
-      </form>
-      <h1 className="header">Search above to find great new recipes!</h1>
-      <div className="recipes">
+    <div class="App">
+      <div class="search">
+        <div id="cover">
+          <form onSubmit={getSearch} method="get" action="">
+            <div class="tb">
+              <div class="td">
+                <input type="text"
+                  value={search}
+                  onChange={updateSearch} placeholder="Search" required /></div>
+              <div class="td" id="s-cover">
+                <button type="submit">
+                  <div id="s-circle"></div>
+                  <span></span>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="cards" name="cards">
         {recipes.map(recipe => (
           <Recipe
             key={recipe.recipe.label}
             title={recipe.recipe.label}
+            dietLabels={recipe.recipe.dietLabels}
+            healthLabels={recipe.recipe.healthLabels}
             calories={recipe.recipe.calories}
+            servings={recipe.recipe.yield}
+            source={recipe.recipe.source}
             image={recipe.recipe.image}
             ingredients={recipe.recipe.ingredients}
             url={recipe.recipe.url}
           />
         ))}
       </div>
-    </div>
+    </div >
   );
 };
 
